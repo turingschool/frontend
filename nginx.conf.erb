@@ -28,12 +28,23 @@ http {
 
 	upstream app_server {
 		server unix:/tmp/nginx.socket fail_timeout=0;
- 	}
+  }
+
+  upstream tutorials {
+    server http://tutorials.jumpstartlab.com:80;
+  }
 
 	server {
 		listen <%= ENV["PORT"] %>;
 		server_name _;
 		keepalive_timeout 5;
+
+    location /tutorials/ {
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_redirect off;
+      proxy_pass http://tutorials;
+    }
 
 		location / {
 			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
