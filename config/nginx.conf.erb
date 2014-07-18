@@ -40,14 +40,16 @@ http {
 			proxy_pass http://app_server;
 		}
 
-    location /tutorials/ {
-      proxy_redirect off;
+    location /tutorials {
+      proxy_set_header Host tutorials.jumpstartlab.com;
       proxy_pass http://tutorials.jumpstartlab.com/;
+      proxy_redirect default;
     }
 
-    location /apply/ {
-      proxy_redirect off;
+    location /apply {
+      proxy_set_header Host apply.turing.io;
       proxy_pass http://apply.turing.io/;
+      proxy_redirect default;
     }
 	}
 }
