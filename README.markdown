@@ -23,3 +23,9 @@ accessed directly. If it's not, then this is a destructive change to the child
 apps as they'll no longer function correctly when accessed directly.
 
 A blog post with the relevent Rails config options [is here](http://stevesaarinen.com/blog/2013/05/16/mounting-rails-in-a-subdirectory-with-nginx-and-unicorn/).
+
+In order to use this one must enable heroku-buildpack-multi:
+
+```
+heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git
+```
