@@ -1,9 +1,6 @@
 daemon off;
 worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
 
-resolver                  8.8.8.8 valid=300s;
-resolver_timeout          10s;
-
 events {
 	use epoll;
 	accept_mutex on;
@@ -43,7 +40,7 @@ http {
 			proxy_pass http://app_server;
 		}
 
-    location /tutorials/ {
+    location /tutorials {
       proxy_pass http://tutorials.turing.io/;
 			proxy_set_header Host tutorials.turing.io;
       proxy_redirect default;
