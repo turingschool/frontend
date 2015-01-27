@@ -41,13 +41,15 @@ http {
 		}
 
     location /tutorials/ {
-      proxy_redirect off;
       proxy_pass http://tutorials.turing.io/;
+      proxy_set_header Host tutorials.turing.com;
+      proxy_redirect default;
     }
 
-    location /apply/ {
-      proxy_redirect off;
+    location /apply {
+      proxy_set_header Host apply.turing.io;
       proxy_pass http://apply.turing.io/;
+      proxy_redirect default;
     }
 	}
 }
